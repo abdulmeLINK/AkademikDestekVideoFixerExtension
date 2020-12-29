@@ -1,4 +1,4 @@
-# AdesFixe
+# AdesFixer
 
 Eğer akademik destekte video izlerken videonun durması ve sayfa yenilenene kadar düzelmemesi probleminiz varsa bu eklentiyi Chrome tarayıcınıza yüklemeniz yeterli.
 
