@@ -1,0 +1,23 @@
+{
+  "name": "AdesFixer",
+  "version": "0.3",
+  "description": "Akademik destek video düzeltme aracı.",
+  "background" : { "scripts": ["background.js"] },
+  "content_scripts": [{
+    "matches": [    "http://akademikdestek.eba.gov.tr/*",
+      "https://akademikdestek.eba.gov.tr/*",
+      "https://cdnpub.eba.gov.tr/*",
+      "http://cdnpub.eba.gov.tr/*"],
+    "js": ["probe.js"],
+    "all_frames": true
+}],
+"permissions" : [
+    "contextMenus",
+    "tabs",
+    "http://akademikdestek.eba.gov.tr/*",
+    "https://akademikdestek.eba.gov.tr/*",
+    "https://cdnpub.eba.gov.tr/*",
+    "http://cdnpub.eba.gov.tr/*"
+   ],
+  "manifest_version": 2
+}
