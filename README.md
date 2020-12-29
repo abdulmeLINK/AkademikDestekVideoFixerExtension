@@ -1,4 +1,4 @@
-# AkademikDestekVideoFixerExtension (An Chrome extension for fixing video playing problems)
+# AdesFixe
 
 Eğer akademik destekte video izlerken videonun durması ve sayfa yenilenene kadar düzelmemesi probleminiz varsa bu eklentiyi Chrome tarayıcınıza yüklemeniz yeterli.
 
