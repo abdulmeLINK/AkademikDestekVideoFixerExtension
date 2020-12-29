@@ -21,10 +21,13 @@ function job(){
     if(videos.length >0){
         
         for(let video of videos){
-           deployObserver(video);
+          if(video.getAttribute('src') == null){
+            deployObserver(video);
+          }
+           
         }
     }
-    setTimeout(deployOnLoadObserver,3000);
+    setTimeout(deployOnLoadObserver,1000);
 }
 
 function immadiatefix(string){
@@ -34,18 +37,19 @@ function immadiatefix(string){
                     fixedUrl+=string.charAt(i);
                 }
                 else
-                    return fixedUrl;   
+                    return fixedUrl;
+                if(i>300){ return fixedUrl;}
         }
 }
 
 function deployObserver(target){var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
-      if (mutation.attributeName == "src") {
+      if (mutation.attributeName == "src" && mutation.target.getAttribute('src').includes('?')) {
+        observer.disconnect();
         console.log('a')
         console.log(target);
-        src = mutation.target.src
-        mutation.target.src = immadiatefix(src);
-        observer.disconnect();
+        src = mutation.target.src;
+        mutation.target.src =  immadiatefix(src);
       }
     });
   });
@@ -58,11 +62,12 @@ function deployObserver(target){var observer = new MutationObserver(function(mut
 function deployOnLoadObserver(){
     target = document.getElementById('main-container');
     var observer = new MutationObserver(function(mutations) {
+        console.log('some change');
         setTimeout(job,3000)
         observer.disconnect();
   });
   if(target!=null)
-  observer.observe(target, {childList: true, subtree: true});
+  observer.observe(target, {childList: true});
   console.log(target);
 }
 
