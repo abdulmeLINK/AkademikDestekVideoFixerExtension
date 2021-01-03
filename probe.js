@@ -1,33 +1,39 @@
 
-
-setTimeout(job,3000);
-
-
+var timeoutflow = 0
+var timeout = setTimeout(checker,250);
 var videos;
+function checker(){
+  var videos = document.getElementsByTagName('video');
+  if(videos.length==0 && timeoutflow < 60){
+    setTimeout(checker,250);
+    timeoutflow++;
+  }
+  else  {
+    job();
+    deployOnLoadObserver();
+  }
+}
+
+
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     var command = message.startJob
     if(command == 'ok'){
         
     }
-    else{console.log(message)}
+    else{}
   });
 
-
 function job(){
-    
     videos = document.getElementsByTagName('video'); 
-    console.log('videos:');
-    console.log(videos);
+    
     if(videos.length >0){
-        
         for(let video of videos){
-          if(video.getAttribute('src') == null){
+          if(video.getAttribute('src') < 10){
             deployObserver(video);
           }
            
-        }
+        }   
     }
-    setTimeout(deployOnLoadObserver,1000);
 }
 
 function immadiatefix(string){
@@ -42,32 +48,36 @@ function immadiatefix(string){
         }
 }
 
-function deployObserver(target){var observer = new MutationObserver(function(mutations) {
+function deployObserver(target){
+
+var observer = new MutationObserver(function(mutations) {
+
     mutations.forEach(function(mutation) {
       if (mutation.attributeName == "src" && mutation.target.getAttribute('src').includes('?')) {
+        mutation.target.pause();
         observer.disconnect();
-        console.log('a')
-        console.log(target);
         src = mutation.target.src;
-        mutation.target.src =  immadiatefix(src);
+        mutation.target.src =  immadiatefix(src);        
+        mutation.target.currentTime = 0;
+        mutation.target.play();
       }
     });
+
   });
   
   observer.observe(target, {
     attributes: true //configure it to listen to attribute changes
   });
-}
 
+  
+}
+var container = document.body;
 function deployOnLoadObserver(){
-    target = document.getElementById('main-container');
-    var observer = new MutationObserver(function(mutations) {
-        console.log('some change');
-        setTimeout(job,3000)
-        observer.disconnect();
+    var onloadObserver = new MutationObserver(function(mutations) {
+        job();
   });
-  if(target!=null)
-  observer.observe(target, {childList: true});
-  console.log(target);
+  if(container)
+  onloadObserver.observe(container, {childList: true});
+
 }
 
