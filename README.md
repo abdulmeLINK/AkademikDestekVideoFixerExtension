@@ -1,6 +1,6 @@
-# AdesFixer
+# AdesFixer 
 
-Eğer akademik destekte video izlerken videonun durması ve sayfa yenilenene kadar düzelmemesi probleminiz varsa bu eklentiyi Chrome tarayıcınıza yüklemeniz yeterli.
+Eğer Eba Akademik Destek'te video izlerken videonun durması ve sayfa yenilenene kadar düzelmemesi probleminiz varsa bu eklentiyi Chrome tarayıcınıza yüklemeniz yeterli. 
 
 Yapmanız gerekenler:
 - Bu eklentiyi indirmeniz
